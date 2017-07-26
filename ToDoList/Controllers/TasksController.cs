@@ -52,6 +52,7 @@ namespace ToDoList.Controllers
         {
             if (ModelState.IsValid)
             {
+                task.DueDate = DateTime.Now;
                 db.Tasks.Add(task);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -127,6 +128,18 @@ namespace ToDoList.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        //List done check
+        public ActionResult Reminder()
+        {
+            var tasks = db.Tasks.Include(t => t.List);
+            return View(tasks.ToList());
+        }
+        public ActionResult Completed()
+        {
+            var tasks = db.Tasks.Include(t => t.List);
+            return View(tasks.ToList());
         }
     }
 }

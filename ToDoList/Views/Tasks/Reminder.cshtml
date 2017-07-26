@@ -1,17 +1,6 @@
 ﻿@model IEnumerable<ToDoList.Models.Task>
 
-@{
-    ViewBag.Title = "Your Tasks";
-}
-
-@{
-    Html.RenderPartial("Reminder");
-}
-<h2>Your Tasks</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>Over Due Tasks</h2>
 <table class="table">
     <tr>
         <th>
@@ -31,7 +20,7 @@
 
     @foreach (var item in Model)
     {
-        if (item.DueDate >= DateTime.Now && item.IsDone == false)
+        if (item.DueDate < DateTime.Now && item.IsDone == false)
         {
             <tr>
                 <td>
@@ -47,8 +36,8 @@
                     @Html.DisplayFor(modelItem => item.DueDate)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
                     @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                 </td>
             </tr>
@@ -56,6 +45,3 @@
     }
 
 </table>
-@{
-    Html.RenderPartial("Completed");
-}

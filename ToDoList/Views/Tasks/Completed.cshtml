@@ -1,0 +1,21 @@
+﻿@model IEnumerable<ToDoList.Models.Task>
+
+<h2>Completed Tasks</h2>
+@foreach (var item in Model)
+{
+    if (item.IsDone == true)
+    {
+        <table class="table">
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDone)
+
+                    @Html.DisplayFor(modelItem => item.List.Title)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        </table>
+    }
+}
